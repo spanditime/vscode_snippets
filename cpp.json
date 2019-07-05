@@ -1,0 +1,49 @@
+{
+	"header guard": {
+		"prefix": "hpp",
+		"body": [
+			"#ifndef ${1:HEADER_FILE}_HPP",
+			"#define ${1:HEADER_FILE}_HPP",
+			"",
+			"$0",
+			"",
+			"#endif // !${1:HEADER_FILE}_HPP"
+		],
+		"description": "Header guard"
+	},
+
+	"Singleton class declaration": {
+		"prefix": "singletondec",
+		"body": [
+			"class ${1:Name}{",
+			"// singleton pattern",
+			"private:",
+			"\t${1:Name}();",
+			"\t~${1:Name}();",
+			"\tstatic ${1:Name} *_instance;",
+			"",
+			"public:",
+			"\tstatic ${1:Name} *getInstance();",
+			"// !singleton pattern",
+			"",
+			"$0",
+			"};"
+		],
+		"description": "Singleton class declaration"
+	},
+	"Singleton class definition": {
+		"prefix": "singletondef",
+		"body": [
+			"#include \"$1\"",
+			"$5\n",
+			"${2:Name} *${2:Name}::_instance = nullptr;\n",
+			"${2:Name}::${2:Name}(){\n$3\n}\n",
+			"${2:Name}::~${2:Name}(){\n$4\n}\n",
+			"${2:Name} *${2:Name}::getInstance(){",
+			"\tif(${2:Name}::_instance == nullptr)",
+			"\t\t${2:Name}::_instance = new ${2:Name}();",
+			"\treturn ${2:Name}::_instance;\n}\n\n$0"
+		],
+		"description": "Singleton class definition"
+	}
+}
